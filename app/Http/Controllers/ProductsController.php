@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -13,7 +14,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $product = Products::all();
+        $subjudul = 'Katalog Lengksp';
+        return view('products.index', ['subjudul' => $subjudul, 'product' => $product]);
     }
 
     /**
@@ -23,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -34,7 +37,11 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        Products::create($request->all());
+
+        return redirect('/products');
     }
 
     /**
@@ -45,7 +52,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**
