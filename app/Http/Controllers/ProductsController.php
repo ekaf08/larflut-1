@@ -52,7 +52,10 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        dd($id);
+        $id = decrypt($id);
+        $product = Products::where('id', $id)->first();
+        // dd($product->toarray());
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -75,7 +78,15 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = decrypt($id);
+        $product = Products::where('id', $id)->first();
+        $product['name'] = $request->name;
+        $product['description'] = $request->description;
+        $product['price'] = $request->price;
+        $product['image_url'] = $request->image_url;
+        $product->save();
+
+        return redirect('/products');
     }
 
     /**
@@ -86,6 +97,11 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = decrypt($id);
+        $product = Products::where('id', $id)->first();
+        // dd($product);
+        $product->delete();
+
+        return redirect('/products');
     }
 }

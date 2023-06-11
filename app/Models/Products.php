@@ -14,4 +14,5 @@ class Products extends Model
 
     protected $guarded  = [];
     protected $table    = 'products';
+    protected $hidden   = ['deleted_at'];
 }

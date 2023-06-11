@@ -19,7 +19,11 @@
                 <td>{{ $key->description }}</td>
                 <td>{{ $key->price }}</td>
                 <td>
-                    <a href="/products/show/{{ $key->id }}">Edit</a>
+                    <a href="/products/show/{{ encrypt($key->id) }}" title="Edit {{ $key->name }}">Edit</a>
+                    <form action="" method="POST">
+                        <a href="/products/destroy/{{ encrypt($key->id) }}" type="submit"
+                            title="Hapus {{ $key->name }}">Hapus</a>
+                    </form>
                 </td>
             </tr>
         @endforeach
